@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">Weather Underground</string>
+
+    <string name="menu_search_weather">Поиск погоды</string>
+    <string name="current_weather">Погода сейчас</string>
+    <string name="feels_like_temp">Ощущается: %s</string>
+    <string name="details">Детали</string>
+
+    <string name="string_wind">Ветер:</string>
+    <string name="string_humidity">Влажность:</string>
+    <string name="string_visibility">Видимость:</string>
+    <string name="string_pressure">Давление:</string>
+
+    <string name="permission_request_title">Запрос локации</string>
+    <string name="permission_request_body">Разрешите определение вашего местоположения, для определения погоды</string>
+
+</resources>

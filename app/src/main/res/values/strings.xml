@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">Weather Underground</string>
+
+    <string name="menu_search_weather">Search weather</string>
+    <string name="current_weather">Current weather</string>
+    <string name="feels_like_temp">Feels like: %s</string>
+    <string name="details">Details</string>
+
+    <string name="string_wind">Wind:</string>
+    <string name="string_humidity">Humidity:</string>
+    <string name="string_visibility">Visibility:</string>
+    <string name="string_pressure">Pressure:</string>
+
+    <string name="permission_request_title">Location permission</string>
+    <string name="permission_request_body">Allow location to track your current weather</string>
+
+</resources>

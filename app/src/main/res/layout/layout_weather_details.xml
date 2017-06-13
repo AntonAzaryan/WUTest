@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.wunderground.weatherunderground.ui.widget.decoration.ItemDecorationFactory"/>
+
+        <import type="com.wunderground.weatherunderground.util.LayoutManagers"/>
+
+        <variable
+            name="viewModel"
+            type="com.wunderground.weatherunderground.ui.weatherforecast.WeatherForecastViewModel"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="@string/details"/>
+
+                <com.wunderground.weatherunderground.ui.widget.compaund.WeatherDetailsView
+                    android:id="@+id/wind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    bind:iconDawable="@{@drawable/svg_wind}"
+                    bind:detailType="@{@string/string_wind}"
+                    bind:detailText="@{viewModel.wind}"
+                    style="@style/WeatherDetailViewStyle"/>
+
+                <com.wunderground.weatherunderground.ui.widget.compaund.WeatherDetailsView
+                    android:id="@+id/humidity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    bind:iconDawable="@{@drawable/svg_humidity}"
+                    bind:detailType="@{@string/string_humidity}"
+                    bind:detailText="@{viewModel.humidity}"
+                    style="@style/WeatherDetailViewStyle"/>
+
+                <com.wunderground.weatherunderground.ui.widget.compaund.WeatherDetailsView
+                    android:id="@+id/pressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    bind:iconDawable="@{@drawable/svg_pressure}"
+                    bind:detailType="@{@string/string_pressure}"
+                    bind:detailText="@{viewModel.pressure}"
+                    style="@style/WeatherDetailViewStyle"/>
+
+                <com.wunderground.weatherunderground.ui.widget.compaund.WeatherDetailsView
+                    android:id="@+id/visibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    bind:iconDawable="@{@drawable/svg_visibility}"
+                    bind:detailType="@{@string/string_visibility}"
+                    bind:detailText="@{viewModel.visibility}"
+                    style="@style/WeatherDetailViewStyle"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardElevation="10dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                bind:dataList="@{viewModel.forecastList}"
+                bind:decoration="@{ItemDecorationFactory.defaultHorizontalDividerExcludeLast()}"
+                bind:delegate="@{viewModel.bindingDelegate}"
+                bind:layoutManager="@{LayoutManagers.linear(LayoutManagers.HORIZONTAL, false)}"/>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</layout>

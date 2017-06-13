@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.wunderground.weatherunderground.util.LayoutManagers"/>
+
+        <import type="com.wunderground.weatherunderground.ui.widget.decoration.ItemDecorationFactory"/>
+
+        <variable
+            name="viewModel"
+            type="com.wunderground.weatherunderground.ui.searchweather.SearchViewModel"/>
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:scrollbars="vertical"
+            bind:dataList="@{viewModel.citiesList}"
+            bind:decoration="@{ItemDecorationFactory.defaultDividerExcludeLast()}"
+            bind:delegate="@{viewModel.bindingDelegate}"
+            bind:layoutManager="@{LayoutManagers.linear()}"/>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"/>
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search"
+            style="@style/SearchViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:iconifiedByDefault="false"
+            app:defaultQueryHint="@string/menu_search_weather"
+            app:searchHintIcon="@drawable/svg_search"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.loadingVisible}"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>
+

@@ -1,0 +1,96 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+    defaultConfig {
+        applicationId "com.wunderground.weatherunderground"
+
+        minSdkVersion 19
+        targetSdkVersion 25
+
+        versionCode 1
+        versionName "1.0"
+
+        vectorDrawables.useSupportLibrary = true
+
+        def wuApiKeyProperties = new Properties()
+        wuApiKeyProperties.load(new FileInputStream(rootProject.file("WUApiKey.properties")))
+        def wuApiKey = wuApiKeyProperties['WU_API_KEY']
+        def apiBseUrl = "\"http://api.wunderground.com/api/$wuApiKey/\""
+        def autoCompleteBaseUrl = "\"http://autocomplete.wunderground.com/\""
+
+        buildConfigField "String", "WEATHER_API_BASE_URL", apiBseUrl
+        buildConfigField "String", "AUTOCOMPLETE_API_BASE_URL", autoCompleteBaseUrl
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding.enabled = true
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dependencies {
+        final SUPPORT_LIBRARY_VERSION = '25.3.1'
+        compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+        compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+        compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+
+        //RxJava
+        //https://github.com/ReactiveX/RxJava
+        compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+
+        //RxBinding
+        //https://github.com/JakeWharton/RxBinding/
+        compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+        compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+
+        //RxAndroid
+        //https://github.com/ReactiveX/RxAndroid
+        compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+        //Dexter - request permissions for api 23+
+        //https://github.com/Karumi/Dexter
+        compile 'com.karumi:dexter:4.1.0'
+
+        //Glide, Glide transformations
+        //https://github.com/bumptech/glide
+        //https://github.com/wasabeef/glide-transformations
+        compile "com.github.bumptech.glide:glide:3.7.0"
+        compile 'jp.wasabeef:glide-transformations:2.0.1'
+
+        //Retrofit
+        //https://github.com/square/retrofit
+        final RETROFIT_VERSION = '2.2.0'
+        compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+        compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+        compile "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+        compile "com.squareup.okhttp3:logging-interceptor:3.4.1"
+
+        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
+
+        testCompile 'junit:junit:4.12'
+
+
+        compile fileTree(dir: 'libs', include: ['*.jar'])
+    }
+}
